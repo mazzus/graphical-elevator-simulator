@@ -1,0 +1,28 @@
+language: go
+go:
+- 1.9.x
+notifications:
+  email: false
+before_install:
+- curl -L -s https://github.com/golang/dep/releases/download/v0.3.1/dep-linux-amd64
+  -o $GOPATH/bin/dep
+- chmod +x $GOPATH/bin/dep
+- curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+- sudo apt-get install -y nodejs
+- go get github.com/jteeuwen/go-bindata/...
+- go get github.com/elazarl/go-bindata-assetfs/...
+install:
+- make install-frontend-dependencies
+- make install-backend-dependencies
+script:
+- make build-total-all
+deploy:
+  provider: releases
+  api_key:
+    secure: vMIDzGzulMWXjeyRDlGv88T+tWwOg3FPB5h0xIRw7KjTdWhvfB8vUyw0MpS0H/m9oXkeWeVFnzgPQX30szvLamzpj61NaPuWwtS2JSqyq/k7vOaDDtWbqbu8AhJF79I0eAkxPZbekcjWrUGObGmZKTeFBD41M95q5wbxxNgi/BmSoup1KzcDvS0selDK3fkKbGe6F6hfLJd7PHjinr1Et8232245d6UtCpiWEwxDk/Nm+UBA0wAwDaV+ey/s5vX6o1GCD/3WIFU5/vmsegM9UPRRGVqT+NpriftxiD0zAZjKUJ493j14mBOoxt3OkX+HhJ8h7bv/8MY144aiDqU20AKaVeWOG5ZtGjxyJYmyfoyilPYdvwAu+ippjflIgXJaUCFfLtIDhUdTEAjp50kCcGfuj1xkU+tcDuvQxppPAVxu4zgsBZSo7NK7e03CkJRJMydhRUDVKZzasvMdl4VBZaRSwbpDb4QG0XbAl+i7zvYjDCwh9J+ZXBLCrqgSLSGCwQ9QM27c2mongg98CU5cnzGLhLIHGFpGc8hSeiPo6F9gAQjl3zq89VyorbjE3n9NQzH8zXc2VQYsnpX48s8jkfHUkqaUeBOTrtcxh8Yy41+nhKUNqZbjO2EESEX9k9b24pvuEvwnSZnOtXyhufu0eAjxH/IGZG0ZIVx+PhXa9LM=
+  skip_cleanup: true
+  file_glob: true
+  file: "./backend/out/*"
+  on:
+    repo: mazzus/graphical-elevator-simulator
+    tags: true
