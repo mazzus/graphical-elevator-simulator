@@ -4,7 +4,7 @@ This is a simple elevator simulator written for the Sanntidslab at NTNU.
 The simulator is compatible with the drivers from the TTK4145 course.
 
 Feedback is appreciated and errors might occur, after all it's software...
-Leave an issue if you have truouble or if something should be changed!
+Leave an issue if you are having trouble or if something should be changed!
 
 ## Installation
 
