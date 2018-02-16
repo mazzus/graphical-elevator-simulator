@@ -4,9 +4,9 @@ import (
 	"os"
 	"time"
 
-	"github.com/mazzus/elevator-simulator/backend/src/elevator"
-	httpHandlers "github.com/mazzus/elevator-simulator/backend/src/handlers/http"
-	standardHandler "github.com/mazzus/elevator-simulator/backend/src/handlers/standard"
+	"github.com/mazzus/graphical-elevator-simulator/backend/src/elevator"
+	httpHandlers "github.com/mazzus/graphical-elevator-simulator/backend/src/handlers/http"
+	standardHandler "github.com/mazzus/graphical-elevator-simulator/backend/src/handlers/standard"
 	"github.com/op/go-logging"
 	"github.com/spf13/cobra"
 )

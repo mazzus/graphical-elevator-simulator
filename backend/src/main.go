@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/mazzus/elevator-simulator/backend/src/commands"
+	"github.com/mazzus/graphical-elevator-simulator/backend/src/commands"
 )
 
 func main() {

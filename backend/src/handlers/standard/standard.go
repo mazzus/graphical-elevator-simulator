@@ -5,7 +5,7 @@ import (
 	"io"
 	"net"
 
-	"github.com/mazzus/elevator-simulator/backend/src/elevator"
+	"github.com/mazzus/graphical-elevator-simulator/backend/src/elevator"
 	"github.com/op/go-logging"
 )
 

@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/gorilla/mux"
-	"github.com/mazzus/elevator-simulator/backend/src/elevator"
+	"github.com/mazzus/graphical-elevator-simulator/backend/src/elevator"
 	"github.com/op/go-logging"
 )
 
