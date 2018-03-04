@@ -25,8 +25,7 @@ build-frontend:
 
 encode-frontend:
 	rm -f backend/src/handlers/http/bindata_assetfs.go
-	go-bindata-assetfs -pkg http -prefix ./frontend/ ./frontend/out/
-	mv bindata_assetfs.go backend/src/handlers/http
+	go-bindata-assetfs -pkg http -prefix ./frontend/ -o backend/src/handlers/http/bindata_assetfs.go ./frontend/out/
 
 build-backend:
 	rm -rf backend/out/
@@ -38,7 +37,12 @@ build-backend-all:
 	mkdir -p backend/out/
 	for GOOS in $(systems); do \
 		for GOARCH in $(architectures); do \
-			CGO_ENABLED=0 GOOS=$$GOOS GOARCH=$$GOARCH go build -o ./backend/out/elevator-simulator-$$GOOS-$$GOARCH backend/src/main.go; \
+			echo $$GOOS; \
+			unset EXTENSION; \
+			if [ "$$GOOS" = "windows" ]; then \
+				EXTENSION=".exe"; \
+			fi; \
+			CGO_ENABLED=0 GOOS=$$GOOS GOARCH=$$GOARCH go build -o ./backend/out/elevator-simulator-$$GOOS-$$GOARCH$$EXTENSION backend/src/main.go; \
 		done \
 	done
 
