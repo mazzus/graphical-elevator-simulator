@@ -14,9 +14,6 @@ var log = logging.MustGetLogger("standard handler")
 func Server(port int, safeElevator *elevator.SafeElevator) {
 	addrString := fmt.Sprintf(":%d", port)
 	addr, err := net.ResolveTCPAddr("tcp", addrString)
-
-	log.Info(readFloorSensor)
-
 	if err != nil {
 		log.Error("Error resolving addr, server will not start", err)
 		return
@@ -121,7 +118,7 @@ func handleWriteMotorDirection(command []byte, safeElevator *elevator.SafeElevat
 	err := safeElevator.SetDirection(direction)
 	safeElevator.Unlock()
 	if err != nil {
-		log.Warning("Could not set motor direction")
+		log.Warning("Could not set motor direction ", err)
 	}
 
 	log.Debug("/SETMOTORDIR")
@@ -196,7 +193,7 @@ func handleReadOrderButton(command []byte, connection io.Writer, safeElevator *e
 	safeElevator.Unlock()
 
 	if err != nil {
-		log.Warning("Could not get button")
+		log.Debug("Could not get button ", err)
 	}
 
 	var v byte
