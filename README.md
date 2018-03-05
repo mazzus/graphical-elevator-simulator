@@ -45,12 +45,23 @@ Mac:
 It won't run?
 
 Check if you have downloaded and started the right version. Both the operating system and architecture must match.
-Most modern systems are amd64 architectures (yes, also when it is a indel processor).
+Most modern systems are amd64 architectures (yes, also when it is an intel processor).
 
 The permissions are probably missing. The following will resolve the issue:
 
 ```bash
 sudo chmod +x ./write_the_name_of_the_executable_here
+```
+
+### It uses all my CPU
+
+The simulator runs at a pretty high update frequency by default (200Hz). This is to ensure that no events are missed.
+If you are using a laptop this might drain your battery quickly.
+To resolve the issue you may lower the update frequency. This is done by changing the update period. Update periods as low as 20ms (50Hz) will probably be fine.
+Changing the update period is done like this: (insert the name of you executable)
+
+```bash
+./elevator-simulator-linux-amd64 --update-period 20
 ```
 
 ### Flags, configuration and more
