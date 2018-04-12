@@ -75,7 +75,9 @@ Tired of this message? The argument --shh will silence it ;)
 			case <-updateTicker.C:
 				now := time.Now()
 				dTime := now.Sub(lastUpdateTime) // Using time.Now() because the time in the channel might be long ago because of the select
+				elev.Lock()
 				elev.Update(dTime.Seconds())
+				elev.Unlock()
 				lastUpdateTime = now
 			}
 		}
