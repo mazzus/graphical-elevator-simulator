@@ -2,6 +2,7 @@ package elevator
 
 import (
 	"errors"
+	"math"
 	"sync"
 )
 
@@ -207,17 +208,10 @@ func (elevator *Elevator) SetCabinButton(floor int, value bool) error {
 
 // GetFloorSignal returns which of the floorsensors are activated, -1 if the elevator is between floors
 func (elevator *Elevator) GetFloorSignal() int {
-	lower := int(elevator.Position)
-	upper := lower + 1
-
-	if elevator.Position-float64(lower) < elevator.Margin {
-		return lower
+	nearestFloor := math.Round(elevator.Position)
+	if math.Abs(nearestFloor-elevator.Position) < elevator.Margin {
+		return int(nearestFloor)
 	}
-
-	if float64(upper)-elevator.Position < elevator.Margin {
-		return upper
-	}
-
 	return -1
 }
 
