@@ -78,6 +78,7 @@ window.setup = () => {
 
   elev = new Elevator(elevatorCenter, 0, 50, H / (1.5 * NFLOORS));
 
+  frameRate(30);
   createCanvas(W, H);
   rectMode(CENTER);
 
@@ -115,7 +116,6 @@ window.setup = () => {
 window.draw = () => {
   background(190);
   if (!elevator) {
-    console.warn("no elevator");
     return;
   }
 
@@ -215,7 +215,9 @@ window.mousePressed = () => {
 };
 
 function SendButton(type, floor, value) {
-  axios.post(backend + "/button", { Type: type, Floor: floor, Value: value });
+  axios.post(backend + "/button", { Type: type, Floor: floor, Value: value }).catch(err => {
+    // Don't care. User can just press again
+  });
 }
 
 window.mouseReleased = () => {
@@ -252,6 +254,6 @@ function fetchElevator() {
       elevator = response.data;
     })
     .catch(err => {
-      console.error({ err });
+      // Don't care
     });
 }
